@@ -1,4 +1,4 @@
-import csv, socket
+import csv, socket, time
 
 # open csv log file
 log_file = open("log.csv")
@@ -25,8 +25,8 @@ for row in log_reader:
         unique +=1
         destinations.append(fqdn)
     
-# write fqdns to file
-with open("fqdn_list.txt", "a+") as f:
+# write fqdns to file 
+with open(f"fqdn_list.{time.strftime('%Y%m%d')}.txt", "a+") as f:
     for i in destinations:
         f.write(i + "\n")
 
