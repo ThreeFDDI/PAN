@@ -1,1 +1,3 @@
 Log_parsing/*.csv
+Log_parsing/*.txt
+.DS_Store
