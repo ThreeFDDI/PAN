@@ -2,6 +2,7 @@ import csv, socket, time
 
 # open csv log file
 log_file = open("log.csv")
+daily_output = f"fqdn_list.{time.strftime('%Y%m%d')}.txt"
 
 # read csv file
 log_reader = csv.reader(log_file)
@@ -26,15 +27,17 @@ for row in log_reader:
         destinations.append(fqdn)
     
 # write fqdns to file 
-with open(f"fqdn_list.{time.strftime('%Y%m%d')}.txt", "a+") as f:
+with open(daily_output, "a+") as f:
     for i in destinations:
         f.write(i + "\n")
 
-with open("fqdn_list.txt", "r") as f:
+# count total entries
+with open(daily_output, "r") as f:
     for c, l in enumerate(f):
         pass
         master = c + 1
 
+# print stuff
 print(f"Total entries in current file: {total}")
 print(f"Unique entries in current file: {unique}")
 print(f"Total unique entries in master file: {master}")
