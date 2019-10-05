@@ -48,3 +48,4 @@ with open("result.txt", "wb") as outfile:
 print(f"Total entries in current file: {total}")
 print(f"Unique entries in current file: {unique}")
 print(f"Total unique entries in master file: {master}")
+
