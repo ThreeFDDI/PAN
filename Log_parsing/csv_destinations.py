@@ -30,13 +30,24 @@ with open(input_file, "r") as log_file:
             destinations.append(fqdn)
 
 # write fqdns to daily file 
-with open(daily_output, "a+") as f:
+with open(daily_output, "w") as f:
     for i in destinations:
         f.write(i + "\n")
 
-# if master file exists, merge destinations
+# check if master file exists
 if path.exists(master_output):
-    pass
+    # open existing master file
+    with open(master_output, "r") as f:
+        # read master file into list
+        master = f.read().splitlines()
+        # merge master and daily destinations
+        merged = set(master + destinations)
+        # write fqdns to master file 
+        for i in merged:
+            f.write(i + "\n")
+
+        
+        
 
 # create new master file if it does not exist 
 else:
@@ -50,5 +61,6 @@ else:
 # print stuff
 print(f"Total entries in current file: {total}")
 print(f"Unique entries in current file: {len(destinations)}")
-print(f"Total unique entries in master file: {len(master)}")
+print(f"Total entries in master file before: {len(master)}")
+print(f"Total entries in master file after: {len(merged)}")
 
