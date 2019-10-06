@@ -26,7 +26,6 @@ with open(input_file, "r") as log_file:
         if fqdn not in destinations:
             unique +=1
             destinations.append(fqdn)
-        
 
 # write fqdns to file 
 with open(daily_output, "a+") as f:
