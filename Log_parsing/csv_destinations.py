@@ -16,6 +16,7 @@ master = 0
 with open(input_file, "r") as log_file:
     log_reader = csv.reader(log_file)
 
+    next(log_reader)
     for row in log_reader:
         total +=1
         # attempt reverse dns lookup
