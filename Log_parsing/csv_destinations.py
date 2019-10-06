@@ -1,11 +1,12 @@
 import csv, time, glob, socket
 
 # open csv log file
-log_file = open("log.csv")
+input_file = open("log.csv")
 daily_output = f"fqdn_list.{time.strftime('%Y%m%d')}.txt"
+master_output = "master_fqdn_list.txt"
 
 # read csv file
-log_reader = csv.reader(log_file)
+log_reader = csv.reader(input_file)
 
 # create list of destinations
 destinations = []
@@ -39,7 +40,7 @@ with open(daily_output, "r") as f:
 
 read_files = glob.glob("*.txt")
 
-with open("result.txt", "wb") as outfile:
+with open(master_output, "wb") as outfile:
     for f in read_files:
         with open(f, "rb") as infile:
             outfile.write(infile.read())
