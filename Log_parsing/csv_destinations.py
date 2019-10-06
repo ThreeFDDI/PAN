@@ -1,4 +1,5 @@
-import csv, time, glob, socket
+import csv, time, socket
+from os import path
  
 # set filenames
 input_file = "log.csv"
@@ -33,12 +34,18 @@ with open(daily_output, "a+") as f:
     for i in destinations:
         f.write(i + "\n")
 
-read_files = glob.glob("*.txt")
+# if master file exists, merge destinations
+if path.exists(master_output):
+    pass
 
-with open(master_output, "wb") as outfile:
-    for f in read_files:
-        with open(f, "rb") as infile:
-            outfile.write(infile.read())
+# create new master file if it does not exist 
+else:
+    with open(master_output, "w") as f:
+        # copy list for count purposes
+        master = destinations
+        # write fqdns to master file 
+        for i in destinations:
+            f.write(i + "\n")
 
 # print stuff
 print(f"Total entries in current file: {total}")
