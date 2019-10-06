@@ -1,32 +1,32 @@
 import csv, time, glob, socket
-
-# open csv log file
-input_file = open("log.csv")
-daily_output = f"fqdn_list.{time.strftime('%Y%m%d')}.txt"
-master_output = "master_fqdn_list.txt"
-
-# read csv file
-log_reader = csv.reader(input_file)
+ 
+# set filenames
+input_file = "log.csv"
+daily_output = f"fqdn_list_{time.strftime('%Y%m%d')}.txt"
+master_output = "fqdn_list_master.txt"
 
 # create list of destinations
 destinations = []
 
-# init total count and unique count
+# init counters
 total = 0
 unique = 0
 master = 0
 
-# parse csv file destination column
-for row in log_reader:
-    total +=1
-    # attempt reverse dns lookup
-    fqdn = socket.getfqdn(row[8])
-    
-    # ignore destinations already in list
-    if fqdn not in destinations:
-        unique +=1
-        destinations.append(fqdn)
-    
+
+with open(input_file, "r") as log_reader:
+
+    # parse csv file destination column
+    for row in log_reader:
+        total +=1
+        # attempt reverse dns lookup
+        fqdn = socket.getfqdn(row[8])
+        
+        # ignore destinations already in list
+        if fqdn not in destinations:
+            unique +=1
+            destinations.append(fqdn)
+        
 # write fqdns to file 
 with open(daily_output, "a+") as f:
     for i in destinations:
