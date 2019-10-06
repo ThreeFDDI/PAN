@@ -34,29 +34,21 @@ with open(daily_output, "w") as f:
     for i in destinations:
         f.write(i + "\n")
 
-# check if master file exists
-if path.exists(master_output):
-    # open existing master file
-    with open(master_output, "w+") as f:
-        # read master file into list
-        master = f.read().splitlines()
-        # merge master and daily destinations
-        merged = set(master + destinations)
-        # write fqdns to master file 
-        for i in merged:
-            f.write(i + "\n")
+# open existing master file
+with open(master_output, "w+") as f:
+    # read master file into list
+    master = f.read().splitlines()
+    print(master)
+    # merge master and daily destinations
+    merged = set(master + destinations)
+    # write fqdns to master file 
+    for i in merged:
+        f.write(i + "\n")
 
-        
-        
+#
+# master file not being read   
+#        
 
-# create new master file if it does not exist 
-else:
-    with open(master_output, "w") as f:
-        # copy list for count purposes
-        master = destinations
-        # write fqdns to master file 
-        for i in destinations:
-            f.write(i + "\n")
 
 # print stuff
 print(f"Total entries in current file: {total}")
