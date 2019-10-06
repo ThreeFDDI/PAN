@@ -13,16 +13,17 @@ total = 0
 unique = 0
 master = 0
 
+# open csv log file
 with open(input_file, "r") as log_file:
+    # read csv rows
     log_reader = csv.reader(log_file)
-
+    # skip csv header
     next(log_reader)
+    # parse csv rows
     for row in log_reader:
         total +=1
         # attempt reverse dns lookup
         fqdn = socket.getfqdn(row[8])
-        #fqdn = row[8]
-        
         # ignore destinations already in list
         if fqdn not in destinations:
             unique +=1
