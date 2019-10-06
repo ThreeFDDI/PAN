@@ -47,7 +47,7 @@ with open(master_output, "w+") as f:
 
 #
 # master file not being read   
-#        
+# 
 
 
 # print stuff
