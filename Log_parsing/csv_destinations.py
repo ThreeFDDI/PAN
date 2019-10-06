@@ -35,7 +35,7 @@ with open(daily_output, "w") as f:
         f.write(i + "\n")
 
 # open existing master file
-with open(master_output, "r+") as f:
+with open(master_output, "w+") as f:
     # read master file into list
     master = f.read().splitlines()
     print(master)
