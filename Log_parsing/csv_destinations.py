@@ -39,12 +39,16 @@ with open(daily_output, "w") as f:
 if not path.exists(master_output):
     Path(master_output).touch()
 
+else:
+    with open(master_output, "r") as f:
+        # read master file into list
+        master = f.read().splitlines()
+        print(master)
+        print()
+
 # open existing master file
-with open(master_output, "r+") as f:
-    # read master file into list
-    master = f.read().splitlines()
-    print(master)
-    print()
+with open(master_output, "w") as f:
+
     # merge master and daily destinations
     merged = set(master + destinations)
     print(merged)
