@@ -13,6 +13,13 @@ total = 0
 unique = 0
 master = 0
 
-with open(input_file, "r") as log_reader:
-    for row in log_reader:
-        print(row)
+# open csv log file
+log_file = open(input_file)
+
+# read csv file
+log_reader = csv.reader(log_file)
+
+# parse csv file destination column
+for row in log_reader:
+    print(row)
+    
