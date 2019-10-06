@@ -1,5 +1,7 @@
 import csv, time, socket
 from os import path
+from pathlib import Path
+
  
 # set filenames
 input_file = "log.csv"
@@ -34,25 +36,29 @@ with open(daily_output, "w") as f:
     for i in destinations:
         f.write(i + "\n")
 
+if not path.exists(master_output):
+    Path(master_output).touch()
+
 # open existing master file
-with open(master_output, "w+") as f:
+with open(master_output, "r+") as f:
     # read master file into list
     master = f.read().splitlines()
     print(master)
+    print()
     # merge master and daily destinations
     merged = set(master + destinations)
+    print(merged)
+    print()
     # write fqdns to master file 
     for i in merged:
         f.write(i + "\n")
-
-#
-# master file not being read   
-# 
-
 
 # print stuff
 print(f"Total entries in current file: {total}")
 print(f"Unique entries in current file: {len(destinations)}")
 print(f"Total entries in master file before: {len(master)}")
 print(f"Total entries in master file after: {len(merged)}")
+
+
+
 

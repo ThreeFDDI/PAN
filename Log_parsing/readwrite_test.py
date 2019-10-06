@@ -4,5 +4,8 @@ master_output = "fqdn_list_master.txt"
 with open(master_output, "a+") as f:
     # read master file into list
     master = f.read().splitlines()
-    print(master)
+    print(len(master))
     f.write("Add stuff to file\n")
+
+
+
