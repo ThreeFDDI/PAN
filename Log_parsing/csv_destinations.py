@@ -1,10 +1,13 @@
 import os, csv, time, socket
+from shutil import copyfile
 from pathlib import Path
+
  
 # set filenames
 input_csv = "log.csv"
 daily_output = f"fqdn_list_{time.strftime('%Y%m%d')}.txt"
 master_output = "fqdn_list_master.txt"
+master_backup = f"fqdn_list_backup_{time.strftime('%Y%m%d')}.txt"
 renamed_csv = f"log_{time.strftime('%Y%m%d')}.csv"
 
 # init lists for destinations
@@ -13,6 +16,9 @@ master = []
 
 # init counters
 total = 0
+
+# backup master file
+copyfile(master_output, master_backup)
 
 # open csv log file
 with open(input_csv, "r") as log_file:
