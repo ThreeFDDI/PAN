@@ -2,9 +2,10 @@ import os, csv, time, socket
 from pathlib import Path
  
 # set filenames
-input_file = "log.csv"
+input_csv = "log.csv"
 daily_output = f"fqdn_list_{time.strftime('%Y%m%d')}.txt"
 master_output = "fqdn_list_master.txt"
+renamed_csv = f"log_{time.strftime('%Y%m%d')}.csv"
 
 # init lists for destinations
 destinations = []
@@ -14,7 +15,7 @@ master = []
 total = 0
 
 # open csv log file
-with open(input_file, "r") as log_file:
+with open(input_csv, "r") as log_file:
     # read csv rows
     log_reader = csv.reader(log_file)
     # skip csv header
@@ -52,6 +53,9 @@ with open(master_output, "w") as f:
     # write fqdns to master file 
     for i in merged:
         f.write(i + "\n")
+
+# rename log.csv 
+os.rename(input_csv, renamed_csv)
 
 # print stuff
 print(f"Total entries in current file: {total}")
