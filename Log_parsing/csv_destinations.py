@@ -8,6 +8,7 @@ input_csv = "log.csv"
 daily_output = f"fqdn_list_{time.strftime('%Y%m%d')}.txt"
 master_output = "fqdn_list_master.txt"
 master_backup = f"fqdn_list_backup_{time.strftime('%Y%m%d')}.txt"
+master_daily = f"TES_destinations_{time.strftime('%Y%m%d')}.txt"
 renamed_csv = f"log_{time.strftime('%Y%m%d')}.csv"
 
 # init lists for destinations
@@ -62,6 +63,10 @@ with open(master_output, "w") as f:
 
 # rename log.csv 
 os.rename(input_csv, renamed_csv)
+
+# copy master list with date
+copyfile(master_output, master_daily)
+
 
 # print stuff
 print(f"Total entries in current file: {total}")
